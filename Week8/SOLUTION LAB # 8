@@ -1,0 +1,181 @@
+								NAME: AHMED ALI
+								ROLL NO: P19-0042
+								SECTION: 4B
+								
+								
+								
+								ANSWER 1:
+MariaDB [THEMEPARK]> SELECT * FROM EMMA;
++---------+-----------+-----------+------------+-----------+-----------+
+| EMP_NUM | EMP_TITLE | EMP_FNAME | EMP_LNAME  | EMP_PHONE | PARK_CODE |
++---------+-----------+-----------+------------+-----------+-----------+
+|     100 | Ms        | Emma      | Calderdale | 324-9652  | FR1001    |
++---------+-----------+-----------+------------+-----------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [THEMEPARK]> DROP VIEW EMMA;
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [THEMEPARK]> SELECT * FROM EMPLOYEE WHERE EMP_NUM = 100;
++---------+-----------+------------+-----------+------------+---------------+---------------+-----------+-----------+
+| EMP_NUM | EMP_TITLE | EMP_LNAME  | EMP_FNAME | EMP_DOB    | EMP_HIRE_DATE | EMP_AREA_CODE | EMP_PHONE | PARK_CODE |
++---------+-----------+------------+-----------+------------+---------------+---------------+-----------+-----------+
+|     100 | Ms        | Calderdale | Emma      | 1972-06-15 | 1992-03-15    | 0181          | 324-9652  | FR1001    |
++---------+-----------+------------+-----------+------------+---------------+---------------+-----------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [THEMEPARK]> SELECT * FROM EMMA;
+ERROR 1146 (42S02): Table 'THEMEPARK.EMMA' doesn't exist
+MariaDB [THEMEPARK]> 
+
+								ANSWER 2:
+
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [THEMEPARK]> CREATE VIEW EMP_DETAILS AS  SELECT EMP_NUM , PARK_CODE , PARK_NAME, EMP_FNAME , EMP_LNAME , EMP_HIRE_DATE , EMP_DOB FROM THEMEPARK NATURAL JOIN EMPLOYEE  WITH CHECK OPTION;
+Query OK, 0 rows affected (0.050 sec)
+
+MariaDB [THEMEPARK]> SELECT * FROM EMP_DETAILS;
++---------+-----------+--------------+-----------+------------+---------------+------------+
+| EMP_NUM | PARK_CODE | PARK_NAME    | EMP_FNAME | EMP_LNAME  | EMP_HIRE_DATE | EMP_DOB    |
++---------+-----------+--------------+-----------+------------+---------------+------------+
+|     100 | FR1001    | FairyLand    | Emma      | Calderdale | 1992-03-15    | 1972-06-15 |
+|     101 | UK3452    | PleasureLand | Marshel   | Ricardo    | 1996-04-25    | 1978-03-19 |
+|     102 | FR1001    | FairyLand    | Arif      | Arshad     | 1990-12-20    | 1969-11-14 |
+|     103 | UK3452    | PleasureLand | Anne      | Roberts    | 1994-08-16    | 1974-10-16 |
+|     104 | ZA1342    | GoldTown     | Enrica    | Denver     | 2001-10-20    | 1980-11-08 |
+|     105 | FR1001    | FairyLand    | Mirrelle  | Namowa     | 2006-11-08    | 1990-03-14 |
+|     106 | ZA1342    | GoldTown     | Gemma     | Smith      | 1989-01-05    | 1968-02-12 |
+|    2049 | AU1001    | MINILAND     | NOMAN     | RAHAT      | 2015-05-05    | 1990-12-20 |
++---------+-----------+--------------+-----------+------------+---------------+------------+
+8 rows in set (0.002 sec)
+
+MariaDB [THEMEPARK]> DESCRIBE EMP_DETAILS;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| EMP_NUM       | decimal(4,0) | NO   |     | NULL    |       |
+| PARK_CODE     | varchar(10)  | NO   |     | NULL    |       |
+| PARK_NAME     | varchar(35)  | NO   |     | NULL    |       |
+| EMP_FNAME     | varchar(15)  | NO   |     | NULL    |       |
+| EMP_LNAME     | varchar(15)  | NO   |     | NULL    |       |
+| EMP_HIRE_DATE | date         | YES  |     | NULL    |       |
+| EMP_DOB       | date         | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+7 rows in set (0.002 sec)
+
+								ANSWER3:
+								
+MariaDB [THEMEPARK]> SELECT EMP_FNAME , EMP_LNAME , PARK_NAME FROM EMP_DETAILS;
++-----------+------------+--------------+
+| EMP_FNAME | EMP_LNAME  | PARK_NAME    |
++-----------+------------+--------------+
+| Emma      | Calderdale | FairyLand    |
+| Marshel   | Ricardo    | PleasureLand |
+| Arif      | Arshad     | FairyLand    |
+| Anne      | Roberts    | PleasureLand |
+| Enrica    | Denver     | GoldTown     |
+| Mirrelle  | Namowa     | FairyLand    |
+| Gemma     | Smith      | GoldTown     |
+| NOMAN     | RAHAT      | MINILAND     |
++-----------+------------+--------------+
+8 rows in set (0.001 sec)
+
+
+								ANSWER 4:
+
+MariaDB [THEMEPARK]> SELECT * FROM TICKET_SALES;
+ERROR 1146 (42S02): Table 'THEMEPARK.TICKET_SALES' doesn't exist
+MariaDB [THEMEPARK]> SELECT * FROM TICKET;
++-----------+--------------+-------------+-----------+
+| TICKET_NO | TICKET_PRICE | TICKET_TYPE | PARK_CODE |
++-----------+--------------+-------------+-----------+
+|     11001 |        24.99 | Adult       | SP4533    |
+|     11002 |        14.99 | Child       | SP4533    |
+|     11003 |        10.99 | Senior      | SP4533    |
+|     13001 |        18.99 | Child       | FR1001    |
+|     13002 |        34.99 | Adult       | FR1001    |
+|     13003 |        20.99 | Senior      | FR1001    |
+|     67832 |        18.56 | Child       | ZA1342    |
+|     67833 |        28.67 | Adult       | ZA1342    |
+|     67855 |        12.12 | Senior      | ZA1342    |
+|     88567 |        22.50 | Child       | UK3452    |
+|     88568 |        42.10 | Adult       | UK3452    |
+|     89720 |        10.99 | Senior      | UK3452    |
++-----------+--------------+-------------+-----------+
+12 rows in set (0.001 sec)
+
+MariaDB [THEMEPARK]> CREATE VIEW TICKET_SALES AS
+    -> SELECT PARK_NAME , MIN(LINE_PRICE) , MAX(LINE_PRICE)
+    -> FROM THEMEPARK JOIN SALES USING(PARK_CODE)
+    -> JOIN SALES_LINE USING(TRANSACTION_NO)
+    -> GROUP BY PARK_NAME;
+Query OK, 0 rows affected (0.075 sec)
+
+MariaDB [THEMEPARK]> SELECT * FROM TICKET_SALES;
++--------------+-----------------+-----------------+
+| PARK_NAME    | MIN(LINE_PRICE) | MAX(LINE_PRICE) |
++--------------+-----------------+-----------------+
+| FairyLand    |           14.99 |          139.96 |
+| GoldTown     |           12.12 |          114.68 |
+| PleasureLand |           21.98 |          168.40 |
++--------------+-----------------+-----------------+
+3 rows in set (0.001 sec)
+
+								ANSWER 5:
+
+MariaDB [THEMEPARK]> SELECT DISTINCT(DATE_FORMAT(SALE_DATE, '%a-%e-%m-%y'))
+    -> FROM SALES;
++-----------------------------------------+
+| (DATE_FORMAT(SALE_DATE, '%a-%e-%m-%y')) |
++-----------------------------------------+
+| Fri-18-05-07                            |
++-----------------------------------------+
+1 row in set (0.001 sec)
+
+								ANSWER 6:
+MariaDB [THEMEPARK]> SELECT EMP_FNAME , EMP_LNAME , CONCAT(SUBSTR(EMP_DOB, 6, 2),'01',UPPER(SUBSTR(EMP_LNAME, 1, 6)))  AS USER_ID FROM EMPLOYEE;
++-----------+------------+------------+
+| EMP_FNAME | EMP_LNAME  | USER_ID    |
++-----------+------------+------------+
+| Emma      | Calderdale | 0601CALDER |
+| Marshel   | Ricardo    | 0301RICARD |
+| Arif      | Arshad     | 1101ARSHAD |
+| Anne      | Roberts    | 1001ROBERT |
+| Enrica    | Denver     | 1101DENVER |
+| Mirrelle  | Namowa     | 0301NAMOWA |
+| Gemma     | Smith      | 0201SMITH  |
+| NOMAN     | RAHAT      | 1201RAHAT  |
++-----------+------------+------------+
+8 rows in set (0.001 sec)
+
+								ANSWER 7:
+
+MariaDB [THEMEPARK]> SELECT CONCAT(EMP_FNAME , ' ',EMP_LNAME )AS NAME , EMP_DOB 
+    -> FROM EMPLOYEE WHERE DAYOFMONTH(EMP_DOB) = '14';
++-----------------+------------+
+| NAME            | EMP_DOB    |
++-----------------+------------+
+| Arif Arshad     | 1969-11-14 |
+| Mirrelle Namowa | 1990-03-14 |
++-----------------+------------+
+2 rows in set (0.021 sec)
+
+								ANSWER 8:
+
+MariaDB [THEMEPARK]> SELECT CONCAT(SUBSTR(EMP_PHONE, 1, 3) , LOWER(SUBSTR(EMP_FNAME , 1, 2)))AS USER_PASSWORD FROM EMPLOYEE;
++---------------+
+| USER_PASSWORD |
++---------------+
+| 324em         |
+| 324ma         |
+| 675ar         |
+| 898an         |
+| 504en         |
+| 890mi         |
+| 324ge         |
+| 502no         |
++---------------+
+8 rows in set (0.001 sec)
+
+
